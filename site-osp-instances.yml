@@ -1,6 +1,17 @@
+
 - hosts: localhost
   connection: local
   become: no
   gather_facts: true
+
+  tasks:
+
+    - name: Copy repo file
+      copy:
+        src: ../files/instances.repo
+        dest: /etc/yum.repos.d/instances.repo
+
+
   roles:
-   - osp-servers
+   - osp-setup
+   #- osp-servers

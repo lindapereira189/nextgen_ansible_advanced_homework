@@ -1,5 +1,5 @@
-- name: Create Homework Assignment project
-
+#- name: Create Homework Assignment project
+---
 
 - name: Machine Credentail to connect to workstation using openstack.pub
   tower_credential:
@@ -12,6 +12,17 @@
     tower_password: r3dh4t1!
     ssh_key_data: "/root/.ssh/openstack.pem"
     username: cloud-user
+
+- name: Create project in tower named 00_Homework Assignment
+  tower_project:
+    name: "{{ proj_name }}"
+    description: "My Homework Assignment"
+    scm_type: git
+    scm_update_on_launch: True
+    scm_url : "https://github.com/lindapereira189/nextgen_ansible_advanced_homework.git"
+#    organization: default
+    state: present
+#    tower_config_file: "~/tower_cli.cfg"
 
 - name: Create Inventory
   command: |
@@ -48,7 +59,7 @@
     tower_username: admin
     tower_password: r3dh4t1!
     tower_verify_ssl: no
-    ssh_key_data: /root/.ssh/mykey.pem
+    ssh_key_data: /root/.ssh/openstack.pem
     username: "{{ opentlc_login }}"
 
 - name: Remove secret
