@@ -1,3 +1,16 @@
+- hosts: localhost
+  vars:
+    OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
+    OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"
+    OPENTLC_ID: "{{ lookup('env','OPENTLC_ID') }}"
+  tasks:
+  - name: Create workstation inventory
+    add_host:
+       name: "workstation-{{OSP_GUID}}.{{OSP_DOMAIN}}"
+       group: workstation
+       ansible_user: "{{ OPENTLC_ID }}"
+
+
 - hosts: workstation
   gather_facts: true
   roles:
@@ -6,22 +19,22 @@
 # Setup front-end load balancer tier
 
 
-- name: setup load-balancer tier
-  hosts: frontends
-  become: yes
-  roles:
-    - {name: base-config, tags: base-config}
-    - {name: lb-tier, tags: [lbs, haproxy]}
+#- name: setup load-balancer tier
+#  hosts: frontends
+#  become: yes
+#  roles:
+#    - {name: base-config, tags: base-config}
+#    - {name: lb-tier, tags: [lbs, haproxy]}
 
 # Setup application servers tier
 
-- name: setup app tier
-  hosts: apps
-  become: yes
-  gather_facts: false
-  roles:
-    - {name: base-config, tags: base-config}
-    - {name: app-tier, tags: [apps, tomcat]}
+#- name: setup app tier
+#  hosts: apps
+#  become: yes
+#  gather_facts: false
+#  roles:
+#    - {name: base-config, tags: base-config}
+#    - {name: app-tier, tags: [apps, tomcat]}
 
 # Setup database tier
 

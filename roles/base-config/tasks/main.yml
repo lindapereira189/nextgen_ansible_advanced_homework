@@ -9,6 +9,9 @@
     backup: yes
 
 - name: enable repos
+    copy:
+      src: files/instances.repo
+      dest: /etc/yum.repos.d/instances.repo
  
-- name: install base tools and packages
+#- name: install base tools and packages
 

@@ -1,5 +1,12 @@
 ---
 # vars file for osp.servers
+
+#servers_floatingip_details:
+#  - { server_name: frontend1, security_group: frontend, meta: 'group=load_balancers, deployment_name=dev' }
+#  - { server_name: app1, security_group: apps, meta: 'group=app_servers, deployment_name=QA' }
+#  - { server_name: app2, security_group: apps, meta: 'group=app_servers, deployment_name=dev' }
+#  - { server_name: appdb1, security_group: db, meta: 'group=database_servers, deployment_name=dev' }
+
 osp_servers:
   frontend:
     name: frontend
@@ -37,3 +44,27 @@ osp_servers:
     security_group: db
     meta:
       - { group: appdbs, deployment_name: QA}
+
+
+
+#openstack_instances:
+#  - instance_name: app1
+#    group: apps
+#    deployment: dev
+#    security_group_name: apps
+
+#  - instance_name: app2
+#    group: apps
+#    deployment: dev
+#    security_group_name: apps
+
+#  - instance_name: db
+#    group: appdbs
+ #   deployment: dev
+#    security_group_name: db
+
+#  - instance_name: frontend
+#    group: frontends
+#    deployment: dev
+#    security_group_name: frontend
+

@@ -1,17 +1,18 @@
-
 - hosts: localhost
-  connection: local
-  become: no
-  gather_facts: true
-
+  vars:
+    OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
+    OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"
+    OPENTLC_ID: "{{ lookup('env','OPENTLC_ID') }}"
   tasks:
+  - name: Create workstation inventory
+    add_host:
+       name: "workstation-{{OSP_GUID}}.{{OSP_DOMAIN}}"
+       group: workstation
+       ansible_user: "{{ OPENTLC_ID }}"
 
-    - name: Copy repo file
-      copy:
-        src: ../files/instances.repo
-        dest: /etc/yum.repos.d/instances.repo
 
-
+- hosts: workstation
+  become: yes
   roles:
-   - osp-setup
-   #- osp-servers
+    - osp-servers
+    #- osp-facts
