@@ -15,6 +15,7 @@
   gather_facts: false
 
 
+# SMoke tests
 - name: End to end smoke tests
   hosts: apps:appdbs
   gather_facts: true
