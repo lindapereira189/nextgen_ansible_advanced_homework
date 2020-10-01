@@ -16,6 +16,7 @@
 
 - hosts: workstation
   become: true
+  become_method: sudo
   gather_facts: false
     
   tasks:
@@ -23,6 +24,8 @@
       file:
         path: /root/bin
         state: directory
+      become: yes
+
     - name: get script common.sh
       get_url:
         url: "{{ param_repo_base }}/scripts/common.sh"
