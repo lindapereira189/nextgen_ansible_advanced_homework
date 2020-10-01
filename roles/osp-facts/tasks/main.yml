@@ -7,7 +7,7 @@
   register: result
 
 - debug:
-    msg: "{{ result.openstack_servers.metadata.group }} {{ result.openstack_servers.metadata.deployment_name }}"
+    msg: "{{ result.openstack_servers[0]metadata.group }} {{ result.openstack_servers.metadata[0]deployment_name }}"
 
 - name: Add host
   add_host:
