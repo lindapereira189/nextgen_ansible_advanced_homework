@@ -4,8 +4,29 @@
   roles:
   - name: osp-facts
 
-  tasks:
-    - name: import playbook
-      include_tasks: "three-tier-playbook.yml"
+- name: setup database tier
+  become: yes
+  hosts: appdbs
+  roles:
+    - {name: base-config, tags: base-config}
+    - {name: db-tier, tags: [dbs, postgres]}
+
+
+- name: setup app tier
+  hosts: apps
+  become: yes
+  gather_facts: false
+  roles:
+    - {name: base-config, tags: base-config}
+    - {name: app-tier, tags: [apps, tomcat]}
+
+
+
+- name: setup load-balancer tier
+  hosts: frontends
+  become: yes
+  roles:
+    - {name: base-config, tags: base-config}
+    - {name: lb-tier, tags: [lbs, haproxy]}
 
 
