@@ -1,3 +1,24 @@
+Changes made in the main role:
+
+1. site-config-tower.yml:
+   - removed the unassigned task in the playbook on the first line
+   - changed the path_to_opentlc_key & opentlc_login parameters in the command to execute the playbook
+
+2. Created group_vars that is access by multiple osp roles
+   
+3. Developed site-osp-instances.yml playbook which calls the osp-servers roles o create the instances
+
+4. Developed roles that will deploy postgres, apps, load-balancer on 3-tier App
+
+5. Developed site-smoke-osp.yml & site-smoketest-aws.yml playbooks to run smoke test on 3 tier
+
+6. Developed site-osp-delete.yml playbook to delete the created instances
+
+7. Executed the workflow on tower "cicd-workflow" which created the instances and the 3 tier app
+
+
+
+
 ==== Ansible Tower Config
 
 
@@ -40,23 +61,7 @@
 
 
 
-Changes made in the role:
 
-1. site-config-tower.yml:
-   - removed the unassigned task in the playbook on the first line
-   - changed the path_to_opentlc_key & opentlc_login parameters in the command to execute the playbook
-
-2. Created group_vars that is access by multiple osp roles
-   
-3. Developed site-osp-instances.yml playbook which calls the osp-servers roles o create the instances
-
-4. Developed roles that will deploy postgres, apps, load-balancer on 3-tier App
-
-5. Developed site-smoke-osp.yml & site-smoketest-aws.yml playbooks to run smoke test on 3 tier
-
-6. Developed site-osp-delete.yml playbook to delete the created instances
-
-7. Executed the workflow on tower "cicd-workflow" which created the instances and the 3 tier app
 
 
 
