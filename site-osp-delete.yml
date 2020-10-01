@@ -11,6 +11,11 @@
        group: workstation
        ansible_user: "{{ OPENTLC_ID }}"
 
+  - name: pause
+    pause:
+      minutes: 2
+
+
 - hosts: workstation
   become: yes
   vars_files:
