@@ -6,6 +6,6 @@
 
   tasks:
     - name: import playbook
-      include: 
-        - "three-tier-playbook.yml"
+      include_tasks: "three-tier-playbook.yml"
+
 
