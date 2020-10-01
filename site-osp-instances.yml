@@ -22,3 +22,4 @@
   roles:
     - osp-servers
     #- osp-facts
+  ignore_errors: yes

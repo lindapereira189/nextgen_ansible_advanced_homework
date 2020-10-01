@@ -12,14 +12,11 @@
        group: workstation
        ansible_user: "{{ OPENTLC_ID }}"
 
+  - debug: var=groups
 
 - hosts: workstation
   become: true
   gather_facts: false
-  vars:
-    param_repo_base: "http://www.opentlc.com/download/ansible_bootcamp"
-    param_user: "linda.pereira-atos.net"
-    param_password: "221@Trixie"
     
   tasks:
     - name: create bin directory
