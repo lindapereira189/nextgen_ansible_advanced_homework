@@ -3,6 +3,7 @@
     OSP_GUID: "{{ lookup('env','OSP_GUID') }}"
     OSP_DOMAIN: "{{ lookup('env','OSP_DOMAIN') }}"
     OPENTLC_ID: "{{ lookup('env','OPENTLC_ID') }}"
+
   tasks:
   - name: Create workstation inventory
     add_host:
@@ -13,6 +14,8 @@
 
 - hosts: workstation
   become: yes
+  vars_file:
+    - "group_vars/osp_vars.yml"
   roles:
     - osp-servers
     #- osp-facts

@@ -1,0 +1,67 @@
+osp_networks:
+  # Public Facing Network   
+  external:
+    cloud_name: openstack
+    network_name: ext_network
+    provider_network_type: flat
+    provider_physical_network: datacentre
+    subnet_name: ext_subnet
+    cidr_network: "192.0.2.0/24"
+    state: present
+    external: true
+    gateway_ip: 192.0.2.254
+    admin_state: yes
+    ip_version: 4
+    enable_dhcp: no
+    allocation_pool_start: 192.0.2.150
+    allocation_pool_end: 192.0.2.200
+
+
+  # Private Facing Network   
+  internal:
+    cloud_name: openstack
+    network_name: int_network
+    subnet_name: int_subnet
+    cidr_network: "172.16.0.0/24"
+    state: present
+    external: false
+    admin_state: yes
+    ip_version: 4
+    enable_dhcp: yes
+
+  # Public Facing Router connecting the two networks
+osp_router:
+  router:
+    cloud_name: openstack
+    state: present
+    name: router
+    network: ext_network
+    interfaces: int_subnet
+
+servers_floatingip_details:
+  - { server_name: frontend1, security_group: frontend, meta: 'group=load_balancers, deployment_name=dev' }
+  - { server_name: app1, security_group: apps, meta: 'group=app_servers, deployment_name=QA' }
+  - { server_name: app2, security_group: apps, meta: 'group=app_servers, deployment_name=dev' }
+  - { server_name: appdb1, security_group: db, meta: 'group=database_servers, deployment_name=dev' }
+
+
+openstack_instances: 
+  - instance_name: app1
+    group: apps
+    deployment: dev
+    security_group_name: apps
+
+  - instance_name: app2
+    group: apps
+    deployment: dev
+    security_group_name: apps
+
+  - instance_name: db
+    group: appdbs
+    deployment: dev
+    security_group_name: db
+
+  - instance_name: frontend
+    group: frontends
+    deployment: dev
+    security_group_name: frontend
