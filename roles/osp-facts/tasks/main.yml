@@ -12,22 +12,26 @@
 
 - name: Add host
   add_host:
-    name: "{{ item.public_v4 }}"
-    group: "{{ item.metadata.group }}"
-    #ansible_ssh_private_key_file: ~/.ssh/openstack.pem
+    host: "{{ item.accessIPv4 }}"
+    group:
+      -  "{{ item.metadata.group }}"
+    ansible_ssh_private_key_file: ~/.ssh/ansible_ssh
     ansible_ssh_user: cloud-user
   loop: "{{ result.openstack_servers }}"
-  delegate_to: workstation
-  register: group_result
-
-- name: Add host
-  add_host:
-    name: "{{ item.public_v4 }}"
-    group: "{{ item.metadata.deployment_name }}"
-    #ansible_ssh_private_key_file: ~/.ssh/openstack.pem
-    ansible_ssh_user: cloud-user
-  loop: "{{ result.openstack_servers }}"
-  delegate_to: workstation
+  #delegate_to: workstation
+  #register: group_result
 
 - debug:
-    msg: "{{ group_result }}"
+    var: groups
+
+
+
+#- name: Add host
+#  add_host:
+#    name: "{{ item.public_v4 }}"
+#    group: "{{ item.metadata.deployment_name }}"
+#    ansible_ssh_private_key_file: ~/.ssh/openstack.pem
+#    ansible_ssh_user: cloud-user
+#  loop: "{{ result.openstack_servers }}"
+  #delegate_to: workstation
+
