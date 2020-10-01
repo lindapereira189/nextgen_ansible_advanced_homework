@@ -14,7 +14,7 @@
 
 - hosts: workstation
   become: yes
-  vars_file:
+  vars_files:
     - "group_vars/osp_vars.yml"
   roles:
     - osp-servers
