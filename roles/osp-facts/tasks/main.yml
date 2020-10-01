@@ -6,6 +6,9 @@
    #region_name: regionOne
   register: result
 
+- debug:
+    msg: "{{ result }}"
+
 - name: Add host
   add_host:
     name: "{{ item.public_v4 }}"
